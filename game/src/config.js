@@ -1,61 +1,18 @@
-// Every tuning number and colour in one place. The playfield is a fixed 1280x720 logical area;
-// the renderer scales it to the window, so no rule below depends on the screen size.
-
-export const FIELD = { width: 1280, height: 720, groundY: 664 };
-
-/** The simulation's fixed step, in seconds: 60 updates a second whatever the display's rate. */
-export const STEP = 1 / 60;
-
-export const PLAYER = {
-  width: 72,
-  height: 24,
-  speed: 560,
-  invulnerable: 1.5,
-};
-
-export const LIVES = 3;
-
-export const BLOCK = {
-  minWidth: 40,
-  maxWidth: 110,
-  height: 36,
-  speed: 240,
-  speedPerLevel: 30,
-  speedJitter: 90,
-  interval: 0.55,
-  intervalScale: 0.88,
-  minInterval: 0.14,
-  dodgePoints: 1,
-};
-
-export const COIN = {
-  size: 24,
-  speed: 190,
-  speedPerLevel: 14,
-  interval: 1.4,
-  intervalJitter: 0.8,
-  points: 10,
-};
-
-/** Seconds of play per level, and the last level: speeds and spawn rates stop growing there. */
-export const LEVEL = { seconds: 12, max: 12 };
-
-/** How many falling things can exist at once; the pool is allocated once, at boot. */
-export const POOL_SIZE = 64;
-
-export const PALETTE = {
-  backdrop: '#11141b',
-  sky: '#1b1f2a',
-  ground: '#2a3040',
-  player: '#4fc3f7',
-  block: '#e5534b',
-  coin: '#f2c94c',
-  panel: '#252b38',
-  text: '#eef1f5',
-  muted: '#8b93a3',
-};
-
-export const FONT = 'system-ui, -apple-system, "Segoe UI", sans-serif';
-
-/** Where the best score is kept between visits (this browser only). */
-export const BEST_KEY = 'block-dodger.best';
+// Dustline configuration: world, palette, weapons, tuning.
+export const W = 3600, H = 5200, VIEW_W = 1280, VIEW_H = 800;
+export const PAL = { sand:'#e8d5a3', sand2:'#d9c184', road:'#4a4440', roadEdge:'#f2e6c9', rust:'#b3402a', rustD:'#7e2a1c', turq:'#1fa8a0', turqD:'#0f6f6a', mesa:'#c47a4a', sky:'#f7e8b0', ink:'#2b1d12', white:'#fff8e7' };
+export const WEAPONS = [
+  { name:'REVOLVER', dmg:34, rate:380, spread:.04, pellets:1, range:420, ammo:Infinity, speed:720 },
+  { name:'SHOTGUN', dmg:13, rate:820, spread:.22, pellets:7, range:260, ammo:32, speed:620 },
+  { name:'RIFLE', dmg:22, rate:150, spread:.02, pellets:1, range:560, ammo:120, speed:900 },
+  { name:'SMG', dmg:11, rate:85, spread:.11, pellets:1, range:380, ammo:180, speed:800 },
+];
+export const DISTRICTS = [
+  { name:'TRUCK STOP', x:1500, y:600, w:600, h:520, buyer:1.0 },
+  { name:'MOTEL ROW', x:2150, y:1500, w:650, h:620, buyer:1.15 },
+  { name:'OLD TOWN', x:1350, y:2350, w:900, h:800, buyer:1.3 },
+  { name:'THE MESA', x:400, y:3300, w:800, h:700, buyer:1.55 },
+  { name:'CHECKPOINT SOUTH', x:1500, y:4300, w:700, h:650, buyer:1.8 },
+];
+export const HEAT_NAMES = ['','PATROL','PURSUE','BLOCKADE','DUSTOFF','TACTICAL'];
+export function districtAt(x, y) { for (const d of DISTRICTS) if (x>d.x&&x<d.x+d.w&&y>d.y&&y<d.y+d.h) return d; return { name:'SAN CENIZA — HIGHWAY STRIP', buyer:1 }; }

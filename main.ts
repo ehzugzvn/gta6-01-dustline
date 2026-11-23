@@ -1,12 +1,11 @@
-// A working gta6-01 entry (Node 22, standard library only): the game is this directory's
-// game/ folder, plain static files a desktop browser loads offline (game/index.html and its ES
-// modules, no library and no network request), and the program hands it in. It copies game/ and
-// screenshots/ from beside this file to /output and writes /output/dossier.json, the summary the
-// judge reads, with the vendored make.fun library. Only the plumbing, not an open world: Block
-// Dodger, a plain 2D canvas game where a paddle dodges falling blocks and catches coins, with a
-// title screen, score, lives and levels, game over and restart, flat colours and no sound. Build
-// your own open-world crime game in its place (three.js or any library you vendor under game/),
-// put your 3 or 4 PNG or JPEG screenshots in screenshots/ (the first by name is the cover) and run it.
+// Dustline — a gta6-01 entry (Node 22, standard library only): an original open-world crime
+// game set in San Ceniza, a high-noon desert border town, playable in desktop Chrome from the
+// static files in game/ (no network requests). June Calloway runs contraband between five
+// district buyers across 7 story runs, steals cars, pickups and semi trucks, outruns Ceniza
+// County heat up to DUSTOFF-1, races the strip, and upgrades her ride at the garage. This
+// program copies game/ and screenshots/ to /output and writes /output/dossier.json via the
+// vendored make.fun library.
+console.log('Dustline — San Ceniza open-world crime game');
 //
 // Serve it locally with `node serve.ts`, then open http://localhost:8080.
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:

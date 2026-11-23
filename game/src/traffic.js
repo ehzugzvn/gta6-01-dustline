@@ -1,0 +1,5 @@
+// Highway traffic: cars flow north/south, honk and brake for the player.
+import { makeVehicle, drawVehicle } from './vehicles.js'; import { HWY_X, HWY_W } from './town.js'; import { rr } from './random.js';
+export function spawnTraffic() { const t = []; for (let i = 0; i < 14; i++) { const north = i % 2 === 0; const v = makeVehicle(north ? 'pickup' : 'car', HWY_X + (north ? 145 : 55), 300 + i * 340, north ? 0 : Math.PI); v.speed = north ? -120 : 120; v.traffic = true; t.push(v); } const s = makeVehicle('semi', HWY_X + 145, 1900, 0); s.speed = -80; s.traffic = true; t.push(s); return t; }
+export function updateTraffic(g, dt) { for (const v of g.traffic) { if (v.dead || v === g.player.car) continue; const dir = Math.cos(v.a) > 0 ? 1 : -1; /* a=PI southbound */ let target = v.kind === 'semi' ? 85 : 125; const ahead = g.player.car === v ? 0 : Math.hypot(v.x - g.player.x, v.y - g.player.y); if (ahead < 90) target = 20; v.speed += ((v.a === 0 ? -target : target) - v.speed) * dt * .8; v.y += v.speed * dt; if (v.y < 150) { v.y = 4950; } if (v.y > 5050) { v.y = 200; } } }
+export { drawVehicle };
